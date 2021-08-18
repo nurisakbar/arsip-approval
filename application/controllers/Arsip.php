@@ -37,6 +37,8 @@ class Arsip extends CI_Controller
         'user_id' => $row->user_id,
         'tanggal' => $row->tanggal,
         );
+
+           
             $this->template->load('template', 'arsip/tbl_arsip_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');

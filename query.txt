@@ -1,0 +1,3 @@
+create view view_arsip as SELECT a.*,u.id_bidang,b.nama_bidang,u.full_name 
+FROM tbl_arsip as a join tbl_user as u on a.user_id=u.id_users
+JOIN tbl_bidang as b on b.id=u.id_bidang

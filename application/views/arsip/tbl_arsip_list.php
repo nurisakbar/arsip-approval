@@ -11,15 +11,16 @@
         <div class="box-body">
         <div style="padding-bottom: 10px;"'>
         <?php echo anchor(site_url('arsip/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
-		<?php echo anchor(site_url('arsip/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
-		<?php echo anchor(site_url('arsip/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"'); ?></div>
+		<?php //echo anchor(site_url('arsip/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"');?>
+		<?php //echo anchor(site_url('arsip/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"');?>
+        </div>
         <table class="table table-bordered table-striped" id="mytable">
             <thead>
                 <tr>
                     <th width="30px">No</th>
 		    <th>Judul</th>
 		    <th>File</th>
-		    <th>User Id</th>
+		    <th>Bidang</th>
 		    <th>Tanggal</th>
 		    <th width="200px">Action</th>
                 </tr>
@@ -71,7 +72,7 @@
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "judul"},{"data": "file"},{"data": "user_id"},{"data": "tanggal"},
+                        },{"data": "judul"},{"data": "files"},{"data": "nama_bidang"},{"data": "tanggal"},
                         {
                             "data" : "action",
                             "orderable": false,
