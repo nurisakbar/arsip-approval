@@ -252,6 +252,27 @@ class User extends CI_Controller
     
     public function profile()
     {
+        $row = $this->User_model->get_by_id($this->session->userdata['id_users']);
+
+        if ($row) {
+            $data = array(
+                'button'        => 'Update',
+                'action'        => site_url('user/update_action'),
+        'id_users'      => set_value('id_users', $row->id_users),
+        'full_name'     => set_value('full_name', $row->full_name),
+        'email'         => set_value('email', $row->email),
+        'password'      => set_value('password', $row->password),
+        'images'        => set_value('images', $row->images),
+        'id_bidang'        => set_value('images', $row->id_bidang),
+        'id_user_level' => set_value('id_user_level', $row->id_user_level),
+        'is_aktif'      => set_value('is_aktif', $row->is_aktif),
+        );
+            $this->template->load('template', 'user/profile', $data);
+        } else {
+            $this->session->set_flashdata('message', 'Record Not Found');
+            redirect(site_url('user'));
+        }
+        $this->load->view('user/profile', $data);
     }
 }
 
