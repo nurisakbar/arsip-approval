@@ -273,6 +273,15 @@ class Arsip extends CI_Controller
         // }
         $pdf->Output();
     }
+
+
+    public function approval($id, $value)
+    {
+        $data = ['arsip_id'=>$id,'status_approval'=>$value,'tanggal'=>date('Y-m-d H:i:s'),'user_id'=>$this->session->userdata('id_users')];
+        $this->db->insert('tbl_log', $data);
+        $this->session->set_flashdata('message', 'Status Arsip Berubah');
+        redirect(site_url('arsip'));
+    }
 }
 
 /* End of file Arsip.php */

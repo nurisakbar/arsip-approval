@@ -22,11 +22,16 @@ class Tbl_arsip_model extends CI_Model
         $this->datatables->from('tbl_arsip');
         $this->datatables->join('tbl_user', 'tbl_arsip.user_id=tbl_user.id_users');
         $this->datatables->join('tbl_bidang', 'tbl_bidang.id=tbl_user.id_bidang');
-        //$this->datatables->add_column('files', $this->unserializefile("$1"), 'file');
         $this->datatables->add_column('files', '$1', 'rename_string_is_aktif2(file)');
         $this->datatables->add_column('action', anchor(site_url('arsip/read/$1'), '<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." 
             ".anchor(site_url('arsip/update/$1'), '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." 
                 ".anchor(site_url('arsip/delete/$1'), '<i class="fa fa-trash-o" aria-hidden="true"></i>', 'class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
+        $this->datatables->add_column(
+            'approval',
+            anchor(site_url('arsip/approval/$1/y'), '<i class="fa fa-check-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." 
+                ".anchor(site_url('arsip/approval/$1/n'), '<i class="fa fa-window-close" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm')),
+            'id'
+        );
         return $this->datatables->generate();
     }
 

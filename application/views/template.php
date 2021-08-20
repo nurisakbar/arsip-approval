@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>GARUDA CRUD Generator</title>
+        <title>Aplikasi Arsip</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.7 -->
@@ -54,8 +54,45 @@
                         <span class="icon-bar"></span>
                     </a>
 
+                    
+
                     <div class="navbar-custom-menu">
-                        <ul class="nav navbar-nav">                          
+                        <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+
+          <!-- Notifications: style can be found in dropdown.less -->
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning">10</span>
+            </a>
+            <ul class="dropdown-menu" style="width:600px">
+              <li class="header">Anda Punya 10 Notifikasi</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                <?php
+                $logs = $this->db->get('view_log')->result();
+                foreach ($logs as $log)
+                {
+                ?>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-warning text-yellow"></i>
+                      Arsip <?php echo $log->judul;?> <?php echo $log->status_approval=='y'?'Diterima':'Ditolak';?>
+                      Ole <?php echo $log->full_name;?> Pada Tanggal <?php echo $log->tanggal;?> 
+                    </a>
+                  </li>
+                  <?php
+                }
+                  ?>
+                </ul>
+              </li>
+              <li class="footer"><a href="#">View all</a></li>
+            </ul>
+          </li>
+      
+          <!-- User Account: style can be found in dropdown.less -->                          
 
 
                             <!-- User Account: style can be found in dropdown.less -->
