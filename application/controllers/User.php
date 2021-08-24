@@ -81,7 +81,7 @@ class User extends CI_Controller
         'password'      => $hashPassword,
         'images'        => $foto['file_name'],
         'id_user_level' => $this->input->post('id_user_level', true),
-        'id_bidang' => $this->input->post('id_bidang', true),
+        // 'id_bidang' => $this->input->post('id_bidang', true),
         'is_aktif'      => $this->input->post('is_aktif', true),
         );
 
@@ -126,7 +126,7 @@ class User extends CI_Controller
                 $data = array(
         'full_name'     => $this->input->post('full_name', true),
         'email'         => $this->input->post('email', true),
-        'id_bidang' => $this->input->post('id_bidang', true),
+        // 'id_bidang' => $this->input->post('id_bidang', true),
         'id_user_level' => $this->input->post('id_user_level', true),
         'is_aktif'      => $this->input->post('is_aktif', true));
             } else {
@@ -135,7 +135,7 @@ class User extends CI_Controller
         'email'         => $this->input->post('email', true),
                 'images'        =>$foto['file_name'],
         'id_user_level' => $this->input->post('id_user_level', true),
-        'id_bidang' => $this->input->post('id_bidang', true),
+        // 'id_bidang' => $this->input->post('id_bidang', true),
         'is_aktif'      => $this->input->post('is_aktif', true));
                 
                 // ubah foto profil yang aktif
@@ -263,7 +263,7 @@ class User extends CI_Controller
         'email'         => set_value('email', $row->email),
         'password'      => set_value('password', $row->password),
         'images'        => set_value('images', $row->images),
-        'id_bidang'        => set_value('images', $row->id_bidang),
+        // 'id_bidang'        => set_value('images', $row->id_bidang),
         'id_user_level' => set_value('id_user_level', $row->id_user_level),
         'is_aktif'      => set_value('is_aktif', $row->is_aktif),
         );
@@ -272,7 +272,6 @@ class User extends CI_Controller
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('user'));
         }
-        $this->load->view('user/profile', $data);
     }
 }
 

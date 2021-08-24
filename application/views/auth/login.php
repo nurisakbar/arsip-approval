@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Garuda CRUD Generator</title>
+        <title>Aplikasi Arsip</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.7 -->
@@ -30,7 +30,7 @@
     <body class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
-                <a href="<?php echo base_url(); ?>/adminlte/index2.html"><b>Garuda CRUD</b> Generator</a>
+                <a href="<?php echo base_url(); ?>/adminlte/index2.html"><b>Aplikasi Management Arsip</b></a>
             </div>
             <!-- /.login-logo -->
             <div class="login-box-body">
@@ -58,15 +58,15 @@
                     <div class="col-xs-4">
                         <button type="submit" class="btn btn-danger btn-block btn-flat"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</button>
                     </div>
-                    <div class="col-xs-6">
+                    <!-- <div class="col-xs-6">
                         <?php echo anchor('#', '<i class="fa fa-eye-slash" aria-hidden="true"></i> Lupa Password', array('class' => 'btn btn-primary btn-block btn-flat')); ?>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- /.col -->
 
 
                 <!-- /.col -->
-                <div class="row" style="margin-top: 20px;">
+                <!-- <div class="row" style="margin-top: 20px;">
                     <div class="col-xs-12">
                         <div class="callout callout-info">
                             <h4>Level Super Admin</h4>
@@ -81,7 +81,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div> -->
                 </form>
 
 

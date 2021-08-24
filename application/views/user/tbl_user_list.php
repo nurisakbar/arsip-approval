@@ -17,11 +17,11 @@
             <thead>
                 <tr>
                     <th width="30px">No</th>
-		    <th>Full Name</th>
+		    <th>Nama Pengguna</th>
 		    <th>Email</th>
 		    <th>Nama Level</th>
 		    <th>Status</th>
-            <th>Nama Bidang</th>
+            <!-- <th>Nama Bidang</th> -->
 		    <th width="200px">Action</th>
                 </tr>
             </thead>
@@ -72,7 +72,7 @@
                         {
                             "data": "id_users",
                             "orderable": false
-                        },{"data": "full_name"},{"data": "email"},{"data": "nama_level"},{"data": "is_aktif"},{"data": "nama_bidang"},
+                        },{"data": "full_name"},{"data": "email"},{"data": "nama_level"},{"data": "is_aktif"},
                         {
                             "data" : "action",
                             "orderable": false,

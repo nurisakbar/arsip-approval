@@ -10,8 +10,13 @@
         
         <div class="box-body">
         <div style="padding-bottom: 10px;"'>
+        <?php
+         if ($this->session->userdata('id_user_level')==5) {
+             ?>
         <?php echo anchor(site_url('arsip/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
-		<?php echo anchor(site_url('arsip/pdf'), '<i class="fa fa-file-pdf-o" aria-hidden="true"></i> Export Ke PDF', 'class="btn btn-danger btn-sm"');?>
+         <?php
+         } ?>
+        <?php echo anchor(site_url('arsip/pdf'), '<i class="fa fa-file-pdf-o" aria-hidden="true"></i> Export Ke PDF', 'class="btn btn-danger btn-sm"');?>
 		<?php //echo anchor(site_url('arsip/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"');?>
         </div>
         <table class="table table-bordered table-striped" id="mytable">
@@ -20,9 +25,9 @@
             <th width="30px">No</th>
 		    <th width="400">Judul</th>
 		    <th>File</th>
-		    <th>Bidang</th>
+		    <!-- <th>Bidang</th> -->
 		    <th>Tanggal</th>
-            <th width="80px">Approval</th>
+            <!-- <th width="80px">Approval</th> -->
             <th width="110px">Action</th>
             </tr>
             </thead>
@@ -73,7 +78,7 @@
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "judul"},{"data": "files"},{"data": "nama_bidang"},{"data": "tanggal"},{"data": "approval"},
+                        },{"data": "judul"},{"data": "files"},{"data": "tanggal"},
                         {
                             "data" : "action",
                             "orderable": false,

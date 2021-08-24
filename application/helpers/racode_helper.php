@@ -47,18 +47,31 @@ function rename_string_is_aktif($string)
     return $string=='y'?'Aktif':'Tidak Aktif';
 }
 
-    function rename_string_is_aktif2($string)
-    {
-        $data = unserialize($string);
-        $strings="";
-        $i=1;
-        foreach ($data as $row) {
-            $strings .="<a href='".base_url()."/uploads/$row'>Lihat File Ke $i</a><br>";
-            $i++;
-        }
 
-        return $strings;
+function status_arsip_handler($id)
+{
+    $ci = get_instance();
+    $arsip = $ci->db->get_where('tbl_arsip', ['id'=>$id])->row();
+    if ($arsip->status==null) {
+        return "tandai ready review";
+    } else {
+        return  "sedang di review";
     }
+}
+
+
+function rename_string_is_aktif2($string)
+{
+    $data = unserialize($string);
+    $strings="";
+    $i=1;
+    foreach ($data as $row) {
+        $strings .="<a href='".base_url()."/uploads/$row'>Lihat File Ke $i</a><br>";
+        $i++;
+    }
+
+    return $strings;
+}
     
 
 function is_login()

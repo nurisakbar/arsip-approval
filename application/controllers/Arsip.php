@@ -34,8 +34,9 @@ class Arsip extends CI_Controller
         'id' => $row->id,
         'judul' => $row->judul,
         'file' => $row->file,
-        'user_id' => $row->user_id,
+        'full_name' => $row->full_name,
         'tanggal' => $row->tanggal,
+        'status'=>$row->status
         );
 
            
@@ -277,10 +278,28 @@ class Arsip extends CI_Controller
 
     public function approval($id, $value)
     {
-        $data = ['arsip_id'=>$id,'status_approval'=>$value,'tanggal'=>date('Y-m-d H:i:s'),'user_id'=>$this->session->userdata('id_users')];
-        $this->db->insert('tbl_log', $data);
+        if ($value=='ok') {
+            $this->Tbl_arsip_model->update($id, ['status'=>'Menunggu Review Dari Level 2']);
+        } else {
+            $row = $this->Tbl_arsip_model->get_by_id($id);
+            if ($row->status=='Menunggu Review Dari Level 2') {
+                if ($value=='y') {
+                    $this->Tbl_arsip_model->update($id, ['status'=>'Menunggu Review Dari Level 3']);
+                } else {
+                    $this->Tbl_arsip_model->update($id, ['status'=>null]);
+                }
+            } else {
+                if ($value=='y') {
+                    $this->Tbl_arsip_model->update($id, ['status'=>'Menunggu Review Dari Admin']);
+                } else {
+                    $this->Tbl_arsip_model->update($id, ['status'=>'Menunggu Review Dari Level 3']);
+                }
+            }
+            $data = ['arsip_id'=>$id,'status_approval'=>$value,'tanggal'=>date('Y-m-d H:i:s'),'user_id'=>$this->session->userdata('id_users')];
+            $this->db->insert('tbl_log', $data);
+        }
         $this->session->set_flashdata('message', 'Status Arsip Berubah');
-        redirect(site_url('arsip'));
+        redirect(site_url('arsip'), 'refresh');
     }
 }
 

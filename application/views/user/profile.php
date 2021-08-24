@@ -14,15 +14,10 @@
 
                             <input type="text" class="form-control" name="email" id="email" placeholder="Email" value="<?php echo $email; ?>" /></td></tr>
 
-                    <?php
-                    if ($this->uri->segment(2) == 'create') {
-                        ?>
+                  
 
-                        <tr><td width='200'>Password <?php echo form_error('password') ?></td><td><input type="text" class="form-control" name="password" id="password" placeholder="Password" value="<?php echo $password; ?>" /></td></tr>
-                        <?php
-                    }
-                    ?>
-                    <tr><td>Bidang</td><td><?php echo cmb_dinamis('id_bidang', 'tbl_bidang', 'nama_bidang', 'id', $id_bidang, 'DESC') ?></td></tr>
+                        <tr><td width='200'>Password <?php echo form_error('password') ?></td><td><input type="password" class="form-control" name="password" id="password" placeholder="Password" /></td></tr>
+                       
                     <tr><td width='200'>Foto Profile <?php echo form_error('images') ?></td><td> <input type="file" name="images"></td></tr>
                     <tr><td></td><td><input type="hidden" name="id_users" value="<?php echo $id_users; ?>" /> 
                             <button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button> 

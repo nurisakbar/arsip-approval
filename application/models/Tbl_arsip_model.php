@@ -18,20 +18,34 @@ class Tbl_arsip_model extends CI_Model
     // datatables
     public function json()
     {
-        $this->datatables->select('tbl_arsip.id,judul,file,user_id,tanggal,tbl_bidang.nama_bidang');
+        $this->datatables->select('tbl_arsip.id,judul,file,user_id,tanggal');
         $this->datatables->from('tbl_arsip');
         $this->datatables->join('tbl_user', 'tbl_arsip.user_id=tbl_user.id_users');
-        $this->datatables->join('tbl_bidang', 'tbl_bidang.id=tbl_user.id_bidang');
+        // $this->datatables->join('tbl_bidang', 'tbl_bidang.id=tbl_user.id_bidang');
         $this->datatables->add_column('files', '$1', 'rename_string_is_aktif2(file)');
-        $this->datatables->add_column('action', anchor(site_url('arsip/read/$1'), '<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." 
+              
+
+        if ($this->session->userdata('id_user_level')==5) {
+            $this->datatables->add_column('action', anchor(site_url('arsip/read/$1'), '<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." 
             ".anchor(site_url('arsip/update/$1'), '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." 
                 ".anchor(site_url('arsip/delete/$1'), '<i class="fa fa-trash-o" aria-hidden="true"></i>', 'class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
-        $this->datatables->add_column(
-            'approval',
-            anchor(site_url('arsip/approval/$1/y'), '<i class="fa fa-check-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." 
-                ".anchor(site_url('arsip/approval/$1/n'), '<i class="fa fa-window-close" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm')),
-            'id'
-        );
+        } else {
+            $this->datatables->add_column('action', anchor(site_url('arsip/read/$1'), '<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm')), 'id');
+        }
+        if ($this->session->userdata('id_user_level')==5) {
+            $this->datatables->where('tbl_arsip.user_id', $this->session->userdata('id_users'));
+        }
+
+        if ($this->session->userdata('id_user_level')==4) {
+            $this->datatables->where('tbl_arsip.status', 'Menunggu Review Dari Level 2');
+        }
+
+        if ($this->session->userdata('id_user_level')==3) {
+            $this->datatables->where('tbl_arsip.status', 'Menunggu Review Dari Level 3');
+        }
+        if ($this->session->userdata('id_user_level')==2) {
+            $this->datatables->where('tbl_arsip.status', 'Menunggu Review Dari Admin');
+        }
         return $this->datatables->generate();
     }
 
@@ -58,7 +72,9 @@ class Tbl_arsip_model extends CI_Model
     public function get_by_id($id)
     {
         $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        $this->db->from($this->table);
+        $this->db->join('tbl_user', 'tbl_user.id_users=tbl_arsip.user_id');
+        return $this->db->get()->row();
     }
     
     // get total rows

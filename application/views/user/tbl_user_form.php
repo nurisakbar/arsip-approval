@@ -32,7 +32,7 @@
                             <!--<input type="text" class="form-control" name="is_aktif" id="is_aktif" placeholder="Is Aktif" value="<?php echo $is_aktif; ?>" />--></td></tr>
                     
                     
-                    <tr><td>Bidang</td><td><?php echo cmb_dinamis('id_bidang', 'tbl_bidang', 'nama_bidang', 'id', $id_bidang, 'DESC') ?></td></tr>
+                    <!-- <tr><td>Bidang</td><td><?php echo cmb_dinamis('id_bidang', 'tbl_bidang', 'nama_bidang', 'id', $id_bidang, 'DESC') ?></td></tr> -->
                     <tr><td width='200'>Foto Profile <?php echo form_error('images') ?></td><td> <input type="file" name="images"></td></tr>
                     <tr><td></td><td><input type="hidden" name="id_users" value="<?php echo $id_users; ?>" /> 
                             <button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button> 
