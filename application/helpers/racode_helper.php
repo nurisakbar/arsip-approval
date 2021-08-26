@@ -2,7 +2,7 @@
 function cmb_dinamis($name, $table, $field, $pk, $selected=null, $order=null)
 {
     $ci = get_instance();
-    $cmb = "<select name='$name' class='form-control'>";
+    $cmb = "<select name='$name' class='form-control' id='$name'>";
     if ($order) {
         $ci->db->order_by($field, $order);
     }

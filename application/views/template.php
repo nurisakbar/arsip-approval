@@ -385,6 +385,27 @@
             })
 
             CKEDITOR.replace( 'keterangan' );
+
+            var id_user_level = $("#id_user_level").val();
+                //console.log(id_user_level);
+                if(id_user_level!=5)
+                {
+                    $("#perdes").hide();
+                }else{
+                    $("#perdes").show();
+                }
+
+
+            $('body').on('change', '#id_user_level', function() {
+                var id_user_level = $("#id_user_level").val();
+                //console.log(id_user_level);
+                if(id_user_level!=5)
+                {
+                    $("#perdes").hide();
+                }else{
+                    $("#perdes").show();
+                }
+            });
         </script>
     </body>
 </html>

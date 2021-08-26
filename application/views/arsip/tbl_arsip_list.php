@@ -27,7 +27,7 @@
 		    <th>File</th>
 		    <!-- <th>Bidang</th> -->
 		    <th>Tanggal</th>
-            <!-- <th width="80px">Approval</th> -->
+            <th width="80px">Kategori</th>
             <th width="110px">Action</th>
             </tr>
             </thead>
@@ -78,7 +78,7 @@
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "judul"},{"data": "files"},{"data": "tanggal"},
+                        },{"data": "judul"},{"data": "files"},{"data": "tanggal"},{"data": "nama_kategori"},
                         {
                             "data" : "action",
                             "orderable": false,

@@ -29,6 +29,10 @@
 				<td>Pemilik File</td>
 				<td><?php echo $full_name; ?></td>
 			</tr>
+			<tr>
+				<td>Kategori</td>
+				<td><?php echo $nama_kategori; ?></td>
+			</tr>
 	
 			<tr>
 				<td>Tanggal</td>

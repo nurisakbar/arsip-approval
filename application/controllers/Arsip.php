@@ -36,6 +36,7 @@ class Arsip extends CI_Controller
         'file' => $row->file,
         'full_name' => $row->full_name,
         'tanggal' => $row->tanggal,
+        'nama_kategori' => $row->nama_kategori,
         'status'=>$row->status
         );
 
@@ -56,6 +57,7 @@ class Arsip extends CI_Controller
         'judul' => set_value('judul'),
         'file' => set_value('file'),
         'user_id' => set_value('user_id'),
+        'kategori_id' => set_value('kategori_id'),
         'tanggal' => set_value('tanggal'),
     );
         $this->template->load('template', 'arsip/tbl_arsip_form', $data);
@@ -103,6 +105,7 @@ class Arsip extends CI_Controller
         'judul' => $this->input->post('judul', true),
         'file' => serialize($file),
         'user_id' => $this->input->post('user_id', true),
+        'kategori_id' => $this->input->post('kategori_id', true),
         'tanggal' => $this->input->post('tanggal', true),
         );
 
@@ -124,6 +127,7 @@ class Arsip extends CI_Controller
         'judul' => set_value('judul', $row->judul),
         'file' => set_value('file', $row->file),
         'user_id' => set_value('user_id', $row->user_id),
+        'kategori_id' => set_value('user_id', $row->kategori_id),
         'tanggal' => set_value('tanggal', $row->tanggal),
         );
             $this->template->load('template', 'arsip/tbl_arsip_form', $data);
@@ -143,6 +147,7 @@ class Arsip extends CI_Controller
             $data = array(
         'judul' => $this->input->post('judul', true),
         'file' => $this->input->post('file', true),
+        'kategori_id' => $this->input->post('kategori_id', true),
         'user_id' => $this->input->post('user_id', true),
         'tanggal' => $this->input->post('tanggal', true),
         );

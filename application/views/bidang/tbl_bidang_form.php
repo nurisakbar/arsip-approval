@@ -2,14 +2,14 @@
 	<section class="content">
 		<div class="box box-warning box-solid">
 			<div class="box-header with-border">
-				<h3 class="box-title"><?php echo strtoupper($button) ?> DATA BIDANG</h3>
+				<h3 class="box-title"><?php echo strtoupper($button) ?> DATA KECAMATAN</h3>
 			</div>
 			<form action="<?php echo $action; ?>" method="post">
 			
 				<table class='table table-bordered'>
 	
 					<tr>
-						<td width='200'>Nama Bidang <?php echo form_error('nama_bidang') ?></td><td><input type="text" class="form-control" name="nama_bidang" id="nama_bidang" placeholder="Nama Bidang" value="<?php echo $nama_bidang; ?>" /></td>
+						<td width='200'>Nama Kecamatan <?php echo form_error('nama_bidang') ?></td><td><input type="text" class="form-control" name="nama_bidang" id="nama_bidang" placeholder="Nama Bidang" value="<?php echo $nama_bidang; ?>" /></td>
 					</tr>
 	
 					<tr>

@@ -23,14 +23,19 @@
 
 					<?php
                     } ?>
-	
-					
-	
 					<tr>
 						<td width='200'>Tanggal <?php echo form_error('tanggal') ?></td>
 						<td><input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="Tanggal" value="<?php echo $tanggal; ?>" /></td>
 					</tr>
-	
+					<tr>
+                    <td width='200'>
+                    Kategori Arsip 
+                    </td>
+                    <td>
+                    <?php echo cmb_dinamis('kategori_id', 'tbl_kategori_arsip', 'nama_kategori', 'id', $kategori_id, 'DESC') ?>
+                    </td>
+                    </tr>
+
 					<tr>
 						<td></td>
 						<td>

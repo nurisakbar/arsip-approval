@@ -7,3 +7,10 @@ create view view_log as select tl.id,ta.judul,tl.status_approval,tl.tanggal,tu.f
 from tbl_log as tl 
 join tbl_arsip as ta on ta.id=tl.arsip_id
 join tbl_user as tu on tu.id_users=tl.user_id
+
+
+
+create view view_perdes as 
+select u.id_users as id_perdes,u.full_name,u.id_bidang,b.nama_bidang from tbl_user as u
+JOIN tbl_bidang as b on b.id=u.id_bidang
+where id_user_level=4

@@ -18,10 +18,11 @@ class Tbl_arsip_model extends CI_Model
     // datatables
     public function json()
     {
-        $this->datatables->select('tbl_arsip.id,judul,file,user_id,tanggal');
+        $this->datatables->select('tbl_arsip.id,judul,file,user_id,tanggal,nama_kategori');
         $this->datatables->from('tbl_arsip');
         $this->datatables->join('tbl_user', 'tbl_arsip.user_id=tbl_user.id_users');
-        // $this->datatables->join('tbl_bidang', 'tbl_bidang.id=tbl_user.id_bidang');
+        $this->datatables->join('tbl_bidang', 'tbl_bidang.id=tbl_user.id_bidang');
+        $this->datatables->join('tbl_kategori_arsip', 'tbl_kategori_arsip.id=tbl_arsip.kategori_id');
         $this->datatables->add_column('files', '$1', 'rename_string_is_aktif2(file)');
               
 
@@ -38,10 +39,12 @@ class Tbl_arsip_model extends CI_Model
 
         if ($this->session->userdata('id_user_level')==4) {
             $this->datatables->where('tbl_arsip.status', 'Menunggu Review Dari Level 2');
+            $this->datatables->where('tbl_user.id_perdes', $this->session->userdata('id_users'));
         }
 
         if ($this->session->userdata('id_user_level')==3) {
             $this->datatables->where('tbl_arsip.status', 'Menunggu Review Dari Level 3');
+            $this->datatables->where('tbl_user.id_bidang', $this->session->userdata('id_bidang'));
         }
         if ($this->session->userdata('id_user_level')==2) {
             $this->datatables->where('tbl_arsip.status', 'Menunggu Review Dari Admin');
@@ -71,9 +74,10 @@ class Tbl_arsip_model extends CI_Model
     // get data by id
     public function get_by_id($id)
     {
-        $this->db->where($this->id, $id);
+        $this->db->where('tbl_arsip.id', $id);
         $this->db->from($this->table);
         $this->db->join('tbl_user', 'tbl_user.id_users=tbl_arsip.user_id');
+        $this->db->join('tbl_kategori_arsip', 'tbl_kategori_arsip.id=tbl_arsip.kategori_id');
         return $this->db->get()->row();
     }
     

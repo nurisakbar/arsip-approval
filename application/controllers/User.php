@@ -58,8 +58,10 @@ class User extends CI_Controller
         'images'        => set_value('images'),
         'id_bidang'        => set_value('id_bidang'),
         'id_user_level' => set_value('id_user_level'),
+        'id_perdes'=> set_value('id_perdes'),
         'is_aktif'      => set_value('is_aktif'),
     );
+    
         $this->template->load('template', 'user/tbl_user_form', $data);
     }
     
@@ -81,7 +83,8 @@ class User extends CI_Controller
         'password'      => $hashPassword,
         'images'        => $foto['file_name'],
         'id_user_level' => $this->input->post('id_user_level', true),
-        // 'id_bidang' => $this->input->post('id_bidang', true),
+        'id_bidang' => $this->input->post('id_bidang', true),
+        'id_perdes' => $this->input->post('id_user_level', true)==5?$this->input->post('id_perdes', true):null,
         'is_aktif'      => $this->input->post('is_aktif', true),
         );
 
@@ -107,6 +110,7 @@ class User extends CI_Controller
         'id_bidang'        => set_value('images', $row->id_bidang),
         'id_user_level' => set_value('id_user_level', $row->id_user_level),
         'is_aktif'      => set_value('is_aktif', $row->is_aktif),
+        'id_perdes'      => set_value('id_perdes', $row->id_perdes),
         );
             $this->template->load('template', 'user/tbl_user_form', $data);
         } else {
@@ -126,7 +130,7 @@ class User extends CI_Controller
                 $data = array(
         'full_name'     => $this->input->post('full_name', true),
         'email'         => $this->input->post('email', true),
-        // 'id_bidang' => $this->input->post('id_bidang', true),
+        'id_bidang' => $this->input->post('id_bidang', true),
         'id_user_level' => $this->input->post('id_user_level', true),
         'is_aktif'      => $this->input->post('is_aktif', true));
             } else {
@@ -135,12 +139,13 @@ class User extends CI_Controller
         'email'         => $this->input->post('email', true),
                 'images'        =>$foto['file_name'],
         'id_user_level' => $this->input->post('id_user_level', true),
-        // 'id_bidang' => $this->input->post('id_bidang', true),
+        'id_bidang' => $this->input->post('id_bidang', true),
         'is_aktif'      => $this->input->post('is_aktif', true));
                 
                 // ubah foto profil yang aktif
                 $this->session->set_userdata('images', $foto['file_name']);
             }
+            
 
             $this->User_model->update($this->input->post('id_users', true), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
