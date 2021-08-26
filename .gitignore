@@ -4,7 +4,9 @@
 */cache/*
 !*/cache/index.html
 !*/cache/.htaccess
-
+uploads/*
+assets/foto_profil/*
+application/config/database.php
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
