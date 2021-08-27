@@ -286,7 +286,7 @@ class Arsip extends CI_Controller
         $row = $this->Tbl_arsip_model->get_by_id($id);
 
         if ($value=='ok' && $row->status==null) {
-            echo "disini";
+            echo print_r($row);
             exit;
             $this->Tbl_arsip_model->update($id, ['status'=>'Menunggu Review Dari Level 2']);
         } else {
