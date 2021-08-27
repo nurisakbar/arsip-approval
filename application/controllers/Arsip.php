@@ -294,6 +294,12 @@ class Arsip extends CI_Controller
                 } else {
                     $this->Tbl_arsip_model->update($id, ['status'=>null]);
                 }
+            } elseif ($row->status=='Menunggu Review Dari Admin') {
+                if ($value=='y') {
+                    $this->Tbl_arsip_model->update($id, ['status'=>'Sudah Diterima Oleh Admin']);
+                } else {
+                    $this->Tbl_arsip_model->update($id, ['status'=>'Menunggu Review Dari Level 1']);
+                }
             } else {
                 if ($value=='y') {
                     $this->Tbl_arsip_model->update($id, ['status'=>'Menunggu Review Dari Admin']);
