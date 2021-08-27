@@ -74,8 +74,9 @@ class Tbl_arsip_model extends CI_Model
     // get data by id
     public function get_by_id($id)
     {
+        $this->db->select('tbl_arsip.tanggal,tbl_arsip.judul,tbl_arsip.status,tbl_arsip.id,tbl_arsip.file,tbl_kategori_arsip.nama_kategori,tbl_user.full_name');
         $this->db->where('tbl_arsip.id', $id);
-        $this->db->from($this->table);
+        $this->db->from('tbl_arsip');
         $this->db->join('tbl_user', 'tbl_user.id_users=tbl_arsip.user_id');
         $this->db->join('tbl_kategori_arsip', 'tbl_kategori_arsip.id=tbl_arsip.kategori_id');
         return $this->db->get()->row();
