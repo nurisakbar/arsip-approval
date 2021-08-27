@@ -48,6 +48,7 @@ class Tbl_arsip_model extends CI_Model
         }
         if ($this->session->userdata('id_user_level')==2) {
             $this->datatables->where('tbl_arsip.status', 'Menunggu Review Dari Admin');
+            $this->datatables->or_where('tbl_arsip.status', 'Sudah Diterima Oleh Admin');
         }
         return $this->datatables->generate();
     }

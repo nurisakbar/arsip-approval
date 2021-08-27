@@ -19,6 +19,19 @@
         <?php echo anchor(site_url('arsip/pdf'), '<i class="fa fa-file-pdf-o" aria-hidden="true"></i> Export Ke PDF', 'class="btn btn-danger btn-sm"');?>
 		<?php //echo anchor(site_url('arsip/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"');?>
         </div>
+
+        <?php
+        $query = $this->db->query("select * from tbl_arsip where left(tanggal,4)='".date('Y')."' and user_id=".$this->session->userdata('id_users'))->num_rows();
+        if ($query<1) {
+            echo "<div class='alert alert-danger' role='alert'>
+            SIlahkan upload Dokument !!!!
+        </div>";
+        }
+        ?>
+        
+
+
+        <hr>
         <table class="table table-bordered table-striped" id="mytable">
             <thead>
                 <tr>
