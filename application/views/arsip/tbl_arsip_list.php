@@ -21,12 +21,15 @@
         </div>
 
         <?php
-        $query = $this->db->query("select * from tbl_arsip where left(tanggal,4)='".date('Y')."' and user_id=".$this->session->userdata('id_users'))->num_rows();
-        if ($query<1) {
-            echo "<div class='alert alert-danger' role='alert'>
-            SIlahkan upload Dokument !!!!
-        </div>";
+        if ($this->session->userdata('id_user_level')==5) {
+            $query = $this->db->query("select * from tbl_arsip where left(tanggal,4)='".date('Y')."' and user_id=".$this->session->userdata('id_users'))->num_rows();
+            if ($query<1) {
+                echo "<div class='alert alert-danger' role='alert'>
+                SIlahkan upload Dokument !!!!
+            </div>";
+            }
         }
+  
         ?>
         
 
