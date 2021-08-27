@@ -284,6 +284,8 @@ class Arsip extends CI_Controller
     public function approval($id, $value)
     {
         $row = $this->Tbl_arsip_model->get_by_id($id);
+        echo print_r($row);
+        exit;
         if ($value=='ok' && $row->status==null) {
             $this->Tbl_arsip_model->update($id, ['status'=>'Menunggu Review Dari Level 2']);
         } else {
