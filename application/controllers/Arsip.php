@@ -71,7 +71,7 @@ class Arsip extends CI_Controller
             $this->create();
         } else {
             $config['upload_path'] = './uploads/';
-            $config['allowed_types'] = 'gif|jpg|png';
+            $config['allowed_types'] = 'gif|jpg|png|pdf|doc|docx';
             $this->load->library('upload', $config);
             $this->upload->do_upload('gambar');
             $result1 = $this->upload->data();
