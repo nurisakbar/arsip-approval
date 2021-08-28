@@ -18,12 +18,13 @@ class Tbl_arsip_model extends CI_Model
     // datatables
     public function json()
     {
-        $this->datatables->select('tbl_arsip.id,judul,file,user_id,tanggal,nama_kategori');
+        $this->datatables->select('tbl_arsip.id,judul,file,user_id,tanggal,nama_kategori,full_name');
         $this->datatables->from('tbl_arsip');
         $this->datatables->join('tbl_user', 'tbl_arsip.user_id=tbl_user.id_users');
         $this->datatables->join('tbl_bidang', 'tbl_bidang.id=tbl_user.id_bidang');
         $this->datatables->join('tbl_kategori_arsip', 'tbl_kategori_arsip.id=tbl_arsip.kategori_id');
         $this->datatables->add_column('files', '$1', 'rename_string_is_aktif2(file)');
+        //$this->datatables->add_column('judul', '$1', 'gabung_judul_dan_status(id)');
               
 
         if ($this->session->userdata('id_user_level')==5) {
@@ -75,7 +76,7 @@ class Tbl_arsip_model extends CI_Model
     // get data by id
     public function get_by_id($id)
     {
-        $this->db->select('tbl_arsip.tanggal,tbl_arsip.judul,tbl_arsip.status,tbl_arsip.id,tbl_arsip.file,tbl_kategori_arsip.nama_kategori,tbl_user.full_name');
+        $this->db->select('tbl_arsip.tanggal,tbl_arsip.judul,tbl_arsip.status,tbl_arsip.id,tbl_arsip.file,tbl_kategori_arsip.nama_kategori,tbl_user.full_name,tbl_arsip.user_id,tbl_arsip.kategori_id');
         $this->db->where('tbl_arsip.id', $id);
         $this->db->from('tbl_arsip');
         $this->db->join('tbl_user', 'tbl_user.id_users=tbl_arsip.user_id');

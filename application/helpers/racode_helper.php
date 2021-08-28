@@ -47,6 +47,14 @@ function rename_string_is_aktif($string)
     return $string=='y'?'Aktif':'Tidak Aktif';
 }
 
+function hitung_arsip_by_tahun_by_category($tahun, $category_id)
+{
+    $ci = get_instance();
+    $query = "SELECT count(*) as jumlah FROM tbl_arsip WHERE kategori_id=$category_id and left(tanggal,4)='$tahun'";
+    $row = $ci->db->query($query)->row_array();
+    return $row['jumlah'];
+}
+
 
 function status_arsip_handler($id)
 {

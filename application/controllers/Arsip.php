@@ -93,7 +93,6 @@ class Arsip extends CI_Controller
             // cara akses file name dari gambar 1
 
             $file = [];
-            $file[] = $result['gambar1']['file_name'];
             $file[] =  $result['gambar2']['file_name'];
             $file[] =  $result['gambar3']['file_name'];
             $file[] = $result['gambar4']['file_name'];
@@ -118,6 +117,8 @@ class Arsip extends CI_Controller
     public function update($id)
     {
         $row = $this->Tbl_arsip_model->get_by_id($id);
+        // print_r($row);
+        // exit;
 
         if ($row) {
             $data = array(
@@ -146,9 +147,9 @@ class Arsip extends CI_Controller
         } else {
             $data = array(
         'judul' => $this->input->post('judul', true),
-        'file' => $this->input->post('file', true),
+        //'file' => $this->input->post('file', true),
         'kategori_id' => $this->input->post('kategori_id', true),
-        'user_id' => $this->input->post('user_id', true),
+        //'user_id' => $this->input->post('user_id', true),
         'tanggal' => $this->input->post('tanggal', true),
         );
 
@@ -244,8 +245,14 @@ class Arsip extends CI_Controller
 
     public function grafik()
     {
-        $arsip = $this->db->query("SELECT count(id) as jumlah,left(tanggal,4) as tahun FROM tbl_arsip group by left(tanggal,4)");
+        $arsip = $this->db->query("SELECT k.nama_kategori,count(a.id) as jumlah,left(a.tanggal,4) as tahun
+        FROM tbl_arsip as a
+        left join tbl_kategori_arsip as k on k.id=a.kategori_id
+        group by k.id, left(a.tanggal,4)");
+        //$arsip = $this->db->query("SELECT count(id) as jumlah,left(tanggal,4) as tahun FROM tbl_arsip group by left(tanggal,4)");
         $data['graph'] = $arsip->result();
+        $data['tahun'] = $this->db->query("SELECT DISTINCT YEAR(tanggal) as tahun FROM tbl_arsip")->result();
+        $data['kategori'] = $this->db->query("SELECT * FROM tbl_kategori_arsip ")->result();
         $this->template->load('template', 'arsip/chart', $data);
     }
 
@@ -253,30 +260,34 @@ class Arsip extends CI_Controller
     public function pdf()
     {
         $this->load->library('pdf');
-        $pdf = new FPDF('l', 'mm', 'A5');
+        $pdf = new FPDF('l', 'mm', 'A4');
         // membuat halaman baru
         $pdf->AddPage();
         // setting jenis font yang akan digunakan
         $pdf->SetFont('Arial', 'B', 16);
         // mencetak string
-        $pdf->Cell(190, 7, 'SEKOLAH MENENGAH KEJURUSAN NEEGRI 2 LANGSA', 0, 1, 'C');
+        $pdf->Cell(190, 7, 'LAPORAN ARSIP', 0, 1, 'C');
         $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(190, 7, 'DAFTAR SISWA KELAS IX JURUSAN REKAYASA PERANGKAT LUNAK', 0, 1, 'C');
+        //$pdf->Cell(190, 7, 'SUB JUDUL', 0, 1, 'C');
         // Memberikan space kebawah agar tidak terlalu rapat
         $pdf->Cell(10, 7, '', 0, 1);
         $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(20, 6, 'JUDUL ARSIP', 1, 0);
-        $pdf->Cell(85, 6, 'NAMA MAHASISWA', 1, 0);
-        $pdf->Cell(27, 6, 'NO HP', 1, 0);
-        $pdf->Cell(25, 6, 'TANGGAL LHR', 1, 1);
+        $pdf->Cell(15, 6, 'Nomor', 1, 0);
+        $pdf->Cell(70, 6, 'JUDUL ARSIP', 1, 0);
+        $pdf->Cell(65, 6, 'NAMA DESA', 1, 0);
+        $pdf->Cell(30, 6, 'KATEGORI', 1, 0);
+        $pdf->Cell(30, 6, 'TANGGAL', 1, 1);
         $pdf->SetFont('Arial', '', 10);
-        // $mahasiswa = $this->db->get('mahasiswa')->result();
-        // foreach ($mahasiswa as $row) {
-        //     $pdf->Cell(20, 6, $row->nim, 1, 0);
-        //     $pdf->Cell(85, 6, $row->nama_lengkap, 1, 0);
-        //     $pdf->Cell(27, 6, $row->no_hp, 1, 0);
-        //     $pdf->Cell(25, 6, $row->tanggal_lahir, 1, 1);
-        // }
+        $mahasiswa = $this->db->get('view_arsip')->result();
+        $no=1;
+        foreach ($mahasiswa as $row) {
+            $pdf->Cell(15, 6, $no, 1, 0);
+            $pdf->Cell(70, 6, $row->judul, 1, 0);
+            $pdf->Cell(65, 6, $row->full_name, 1, 0);
+            $pdf->Cell(30, 6, $row->nama_kategori, 1, 0);
+            $pdf->Cell(30, 6, $row->tanggal, 1, 1);
+            $no++;
+        }
         $pdf->Output();
     }
 

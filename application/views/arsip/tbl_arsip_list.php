@@ -39,9 +39,9 @@
             <thead>
                 <tr>
             <th width="30px">No</th>
-		    <th width="400">Judul</th>
+		    <th width="280">Judul</th>
+            <th width="120">Nama Desa</th>
 		    <th>File</th>
-		    <!-- <th>Bidang</th> -->
 		    <th>Tanggal</th>
             <th width="80px">Kategori</th>
             <th width="110px">Action</th>
@@ -94,7 +94,7 @@
                         {
                             "data": "id",
                             "orderable": false
-                        },{"data": "judul"},{"data": "files"},{"data": "tanggal"},{"data": "nama_kategori"},
+                        },{"data": "judul"},{"data": "full_name"},{"data": "files"},{"data": "tanggal"},{"data": "nama_kategori"},
                         {
                             "data" : "action",
                             "orderable": false,

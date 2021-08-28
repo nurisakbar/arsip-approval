@@ -1,6 +1,7 @@
-create view view_arsip as SELECT a.*,u.id_bidang,b.nama_bidang,u.full_name 
+create view view_arsip as SELECT a.*,u.id_bidang,b.nama_bidang,u.full_name,tr.nama_kategori 
 FROM tbl_arsip as a join tbl_user as u on a.user_id=u.id_users
 JOIN tbl_bidang as b on b.id=u.id_bidang
+join tbl_kategori_arsip as tr on tr.id=a.kategori_id
 
 
 create view view_log as select tl.id,ta.judul,tl.status_approval,tl.tanggal,tu.full_name
