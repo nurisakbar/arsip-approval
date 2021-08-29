@@ -73,7 +73,7 @@ class Arsip extends CI_Controller
             $config['upload_path'] = './uploads/';
             $config['allowed_types'] = 'gif|jpg|png|pdf|doc|docx';
             $this->load->library('upload', $config);
-            $this->upload->do_upload('gambar');
+            $this->upload->do_upload('gambar1');
             $result1 = $this->upload->data();
             $this->upload->do_upload('gambar2');
             $result2 = $this->upload->data();
@@ -83,9 +83,9 @@ class Arsip extends CI_Controller
             $result4 = $this->upload->data();
             $this->upload->do_upload('gambar5');
             $result5 = $this->upload->data();
-            $this->upload->do_upload('gambar6');
-            $result6 = $this->upload->data();
-            $result = array('gambar1'=>$result1,'gambar2'=>$result2,'gambar3'=>$result3,'gambar4'=>$result4,'gambar5'=>$result5,'gambar6'=>$result6);
+            // $this->upload->do_upload('gambar6');
+            // $result6 = $this->upload->data();
+            $result = array('gambar1'=>$result1,'gambar2'=>$result2,'gambar3'=>$result3,'gambar4'=>$result4,'gambar5'=>$result5);
             // menampilkan hasil upload
             // echo "<pre>";
             // print_r($result);
@@ -93,12 +93,18 @@ class Arsip extends CI_Controller
             // cara akses file name dari gambar 1
 
             $file = [];
+            $file[] =  $result['gambar1']['file_name'];
             $file[] =  $result['gambar2']['file_name'];
             $file[] =  $result['gambar3']['file_name'];
             $file[] = $result['gambar4']['file_name'];
             $file[] =  $result['gambar5']['file_name'];
-            $file[] =  $result['gambar6']['file_name'];
+            // $file[] =  $result['gambar6']['file_name'];
 
+            // echo "<pre>";
+            // print_r($file);
+            // echo "</pre>";
+
+            // exit;
         
             $data = array(
         'judul' => $this->input->post('judul', true),
