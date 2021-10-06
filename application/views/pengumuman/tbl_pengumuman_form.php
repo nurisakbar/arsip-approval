@@ -13,7 +13,7 @@
 					</tr>
 	
 					<tr>
-						<td width='200'>Keterangan <?php echo form_error('keterangan') ?></td><td><input type="text" class="form-control" name="keterangan" id="keterangan" placeholder="Keterangan" value="<?php echo $keterangan; ?>" /></td>
+						<td width='200'>Keterangan <?php echo form_error('keterangan') ?></td><td><textarea class="form-control" name="keterangan" id="keterangan"><?php echo $keterangan; ?></textarea></td>
 					</tr>
 	
 					<tr>

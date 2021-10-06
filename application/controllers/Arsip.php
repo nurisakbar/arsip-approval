@@ -70,41 +70,27 @@ class Arsip extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->create();
         } else {
-            $config['upload_path'] = './uploads/';
-            $config['allowed_types'] = 'gif|jpg|png|pdf|doc|docx';
-            $this->load->library('upload', $config);
-            $this->upload->do_upload('gambar1');
-            $result1 = $this->upload->data();
-            $this->upload->do_upload('gambar2');
-            $result2 = $this->upload->data();
-            $this->upload->do_upload('gambar3');
-            $result3 = $this->upload->data();
-            $this->upload->do_upload('gambar4');
-            $result4 = $this->upload->data();
-            $this->upload->do_upload('gambar5');
-            $result5 = $this->upload->data();
-            // $this->upload->do_upload('gambar6');
-            // $result6 = $this->upload->data();
-            $result = array('gambar1'=>$result1,'gambar2'=>$result2,'gambar3'=>$result3,'gambar4'=>$result4,'gambar5'=>$result5);
-            // menampilkan hasil upload
-            // echo "<pre>";
-            // print_r($result);
-            // echo "</pre>";
-            // cara akses file name dari gambar 1
-
             $file = [];
-            $file[] =  $result['gambar1']['file_name'];
-            $file[] =  $result['gambar2']['file_name'];
-            $file[] =  $result['gambar3']['file_name'];
-            $file[] = $result['gambar4']['file_name'];
-            $file[] =  $result['gambar5']['file_name'];
-            // $file[] =  $result['gambar6']['file_name'];
-
-            // echo "<pre>";
-            // print_r($file);
-            // echo "</pre>";
-
-            // exit;
+            $count = count($_FILES['files']['name']);
+            for ($i=0;$i<$count;$i++) {
+                if (!empty($_FILES['files']['name'][$i])) {
+                    $_FILES['file']['name'] = $_FILES['files']['name'][$i];
+                    $_FILES['file']['type'] = $_FILES['files']['type'][$i];
+                    $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+                    $_FILES['file']['error'] = $_FILES['files']['error'][$i];
+                    $_FILES['file']['size'] = $_FILES['files']['size'][$i];
+                    $config['upload_path'] = 'uploads/';
+                    $config['allowed_types'] = 'jpg|jpeg|png|gif|doc|docx|pdf|xls|xlsx';
+                    $config['max_size'] = '5000';
+                    $config['file_name'] = $_FILES['files']['name'][$i];
+                    $this->load->library('upload', $config);
+                    if ($this->upload->do_upload('file')) {
+                        $uploadData = $this->upload->data();
+                        $filename = $uploadData['file_name'];
+                        $file[] = $filename;
+                    }
+                }
+            }
         
             $data = array(
         'judul' => $this->input->post('judul', true),
@@ -123,9 +109,6 @@ class Arsip extends CI_Controller
     public function update($id)
     {
         $row = $this->Tbl_arsip_model->get_by_id($id);
-        // print_r($row);
-        // exit;
-
         if ($row) {
             $data = array(
                 'button' => 'Update',
@@ -153,12 +136,40 @@ class Arsip extends CI_Controller
         } else {
             $data = array(
         'judul' => $this->input->post('judul', true),
-        //'file' => $this->input->post('file', true),
         'kategori_id' => $this->input->post('kategori_id', true),
-        //'user_id' => $this->input->post('user_id', true),
         'tanggal' => $this->input->post('tanggal', true),
         );
 
+            $row = $this->Tbl_arsip_model->get_by_id($this->input->post('id', true));
+            $file_old = unserialize($row->file);
+            $file = [];
+            $test =[];
+            $count = count($_FILES['files']['name']);
+     
+            for ($i=0;$i<$count;$i++) {
+                if (!empty($_FILES['files']['name'][$i])) {
+                    $_FILES['file']['name'] = $_FILES['files']['name'][$i];
+                    $_FILES['file']['type'] = $_FILES['files']['type'][$i];
+                    $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+                    $_FILES['file']['error'] = $_FILES['files']['error'][$i];
+                    $_FILES['file']['size'] = $_FILES['files']['size'][$i];
+                    $config['upload_path'] = 'uploads/';
+                    $config['allowed_types'] = 'jpg|jpeg|png|gif|doc|docx|pdf|xls|xlsx';
+                    $config['max_size'] = '5000';
+                    $config['file_name'] = $_FILES['files']['name'][$i];
+                    $this->load->library('upload', $config);
+                    if ($this->upload->do_upload('file')) {
+                        $uploadData = $this->upload->data();
+                        $filename = $uploadData['file_name'];
+                        $file[] = $filename;
+                        $test [] = $i;
+                    }
+                }
+            }
+            foreach ($test as $index=>$key) {
+                $file_old[$key] = $file[$index];
+            }
+            $data['file']  = serialize($file_old);
             $this->Tbl_arsip_model->update($this->input->post('id', true), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('arsip'));

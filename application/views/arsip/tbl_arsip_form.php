@@ -18,7 +18,9 @@
                         ?>
 					<tr>
 						<td width='200'>File Ke - <?php echo $i; ?><?php echo form_error('file') ?></td>
-						<td><input type="file" name="gambar<?php echo $i; ?>"></td>
+						<td>
+							<input type="file" name="files[]">
+						</td>
 					</tr>
 
 					<?php
